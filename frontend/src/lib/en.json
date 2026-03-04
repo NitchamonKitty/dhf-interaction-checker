@@ -1,0 +1,77 @@
+{
+  "app": {
+    "title": "Drug-Herb–Food Interaction Checker",
+    "disclaimer": "*For information only. Not a substitute for professional advice."
+  },
+  "ui": {
+    "language": "Language",
+    "thai": "Thai",
+    "english": "English",
+    "showBothLanguages": "Show both languages",
+    "searchPlaceholder": "Search drugs/herbs/foods…",
+    "processing": "Processing…",
+    "checkButton": "Check Interactions",
+    "select": "Select",
+    "remove": "Remove"
+  },
+
+  "search": {
+    "title": "Search drugs / herbs / foods",
+    "placeholder": "Type a name, e.g., warfarin, ginkgo, grapefruit, simvastatin"
+  },
+
+  "cond": {
+    "title": "Disease-to-Drug Suggestion",
+    "placeholder": "Type a disease, e.g., diabetes, hypertension",
+    "found": "Found diseases:",
+    "suggest": "Suggested drugs:"
+  },
+
+  "profile": {
+    "title": "User Profile",
+    "age": "Age (years)",
+    "agePh": "Enter age",
+    "sex": "Sex at birth",
+    "sexF": "Female (F)",
+    "sexM": "Male (M)",
+    "sexO": "Other (O)",
+    "pregnancy": "pregnancy (if applicable)",
+  
+    "pkConditions": {
+      "title": "Conditions affecting drug interaction",
+      "smoking": "Smoking",
+      "renal": "Renal impairment",
+      "hepatic": "Hepatic impairment"
+    }
+  },
+
+  "results": {
+    "title": "Results",
+    "recommend": "Recommendation:",
+    "empty": "No interactions found",
+    "emptyNote": "*Note: No results does not guarantee safety. Please consult a healthcare professional, especially if you have chronic conditions, are pregnant, or are taking multiple products.",
+
+    "effectDuplicationBadge": "Effect Overlap",
+    "drugclassDuplicationBadge": "Class overlap",
+
+    "entityA": "Entity A",
+    "entityB": "Entity B",
+    "inferredBadge": "Inferred from mechanism",
+    "dhfiA": "A: DHFI",
+    "dhfiB": "B: DHFI",
+    "consumerAdviceLine": "If you are unsure about using these together, consult your doctor or pharmacist first.",
+    "mechanismLabel": "Mechanism / interaction type:",
+    "actionLabel": "Clinical advice:",
+    "contextLabel": "Patient context factors detected",
+    "referencesLabel": "Key references for this interaction",
+    "refPrefix": "Ref",
+    "modeLabel": {
+      "consumer": "Public mode – simplified advice",
+      "pro": "Expert mode – detailed mechanisms and mechanism-based suggested pairs"
+    },
+    "curatedSection": "Curated interactions in the database",
+    "inferredSection": "Mechanism-based suggested interactions",
+    "inferredDisclaimer": "These pairs are inferred from PK/PD mechanisms and may not have direct clinical evidence. Use alongside professional judgement and external literature.",
+    "conditionDrugBadge": "Condition–Drug"
+  }
+}

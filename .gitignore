@@ -1,0 +1,31 @@
+# Node / JS
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+package-lock.json
+
+# Build outputs
+dist/
+build/
+.next/
+client/dist/
+server/dist/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Logs & uploads
+logs/
+*.log
+uploads/
+coverage/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

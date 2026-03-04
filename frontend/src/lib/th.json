@@ -1,0 +1,77 @@
+{
+  "app": {
+    "title": "Drug-Herb–Food Interaction Checker",
+    "disclaimer": "*ผลลัพธ์เพื่อการให้ข้อมูล ไม่แทนคำแนะนำแพทย์/เภสัชกร"
+  },
+  "ui": {
+    "language": "ภาษา",
+    "thai": "ไทย",
+    "english": "อังกฤษ",
+    "showBothLanguages": "แสดงสองภาษา",
+    "searchPlaceholder": "ค้นหา ยา/สมุนไพร/อาหาร…",
+    "processing": "กำลังประมวลผล…",
+    "checkButton": "ตรวจสอบ Interaction",
+    "select": "เลือก",
+    "remove": "ลบ"
+  },
+
+  "search": {
+    "title": "ค้นหายา/สมุนไพร/อาหาร",
+    "placeholder": "พิมพ์ชื่อ เช่น warfarin, ginkgo, grapefruit, simvastatin"
+  },
+
+  "cond": {
+    "title": "โรค → แนะนำยา",
+    "placeholder": "พิมพ์ชื่อโรค เช่น OA, afib",
+    "found": "พบโรค:",
+    "suggest": "รายการยาที่แนะนำ:"
+  },
+
+  "profile": {
+    "title": "ข้อมูลผู้ใช้",
+    "age": "อายุ (ปี)",
+    "agePh": "กรอกอายุ",
+    "sex": "เพศกําเนิด",
+    "sexF": "หญิง (F)",
+    "sexM": "ชาย (M)",
+    "sexO": "อื่น ๆ (O)",
+    "pregnancy": "ตั้งครรภ์ (ถ้ามี)",
+
+    "pkConditions": {
+      "title": "ปัจจัยที่มีผลต่อปฏิสัมพันธ์ของยา",
+      "smoking": "สูบบุหรี่",
+      "renal": "ไตบกพร่อง",
+      "hepatic": "ตับบกพร่อง"
+    }
+  },
+
+  "results": {
+    "title": "ผลการตรวจสอบ",
+    "recommend": "แนะนำ:",
+    "empty": "ยังไม่มีผลลัพธ์",
+    "emptyNote": "*หมายเหตุ: ไม่มีผลลัพธ์ไม่ได้แปลว่าปลอดภัยเสมอไป กรุณาปรึกษาผู้เชี่ยวชาญ โดยเฉพาะหากมีโรคประจำตัว ตั้งครรภ์ หรือใช้หลายรายการร่วมกัน",
+
+    "effectDuplicationBadge": "ฤทธิ์ทับซ้อน",
+    "drugclassDuplicationBadge": "กลุ่มยาทับซ้อน",
+
+    "entityA": "Entity A",
+    "entityB": "Entity B",
+    "inferredBadge": "อนุมานจากกลไก",
+    "dhfiA": "A: DHFI",
+    "dhfiB": "B: DHFI",
+    "consumerAdviceLine": "หากไม่แน่ใจว่าควรใช้ร่วมกันหรือไม่ ควรปรึกษาแพทย์หรือเภสัชกรก่อนใช้",
+    "mechanismLabel": "กลไก / ประเภทปฏิสัมพันธ์:",
+    "actionLabel": "คำแนะนำทางคลินิก:",
+    "contextLabel": "มีปัจจัยเสี่ยงจากผู้ป่วย (patient context)",
+    "referencesLabel": "แหล่งอ้างอิงสำคัญสำหรับคู่นี้",
+    "refPrefix": "Ref",
+    "modeLabel": {
+      "consumer": "โหมดผู้ใช้ทั่วไป – แสดงคำแนะนำแบบอ่านง่าย",
+      "pro": "โหมดผู้เชี่ยวชาญ – แสดงรายละเอียดกลไกและคู่ที่อนุมานจากข้อมูลกลไก"
+    },
+    "curatedSection": "คู่ที่มีอยู่ในฐานข้อมูล (curated interactions)",
+    "inferredSection": "คู่ที่อนุมานจากกลไก (mechanism-based suggestions)",
+    "inferredDisclaimer": "คู่เหล่านี้ได้มาจากแบบจำลองกลไก PK/PD และยังไม่ได้รับการทบทวนเชิงคลินิกโดยตรง โปรดใช้ร่วมกับดุลยพินิจทางวิชาชีพและหลักฐานจากงานวิจัยอื่น ๆ",
+    "conditionDrugBadge": "ภาวะ–ยา"
+  }
+}
