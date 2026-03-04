@@ -1,208 +1,209 @@
-DHFI-C
+# DHFI-C: Drug--Herb--Food Interaction Checker
 
-Drug–Herb–Food Interaction Checker
+DHFI-C is an ontology-guided knowledge graph platform designed to assess
+interactions among prescription medicines, herbal products, dietary
+supplements, and foods. The system integrates curated evidence and
+mechanism-based inference to support context-aware interpretation of
+interactions influenced by health-related conditions.
 
-An ontology-guided, knowledge graph–based software platform for mechanism-transparent and condition-inclusive assessment of drug–herb–food interactions.
+------------------------------------------------------------------------
 
-Overview
+## Abstract
 
-DHFI-C (Drug–Herb–Food Interaction Checker) is a research-oriented software system developed to address limitations of existing interaction-checking platforms, which are typically drug-centric, rely on predefined interaction pairs, and provide limited support for mechanistic transparency and health-condition–inclusive interpretation.
+**Background**\
+The concurrent use of prescription medicines with herbal products,
+dietary supplements, and foods is increasingly common, particularly
+among individuals with chronic diseases. Such real-world co-consumption
+produces complex interaction patterns extending beyond conventional
+drug--drug interactions. Most existing interaction-checking systems
+remain drug-centric, rely on predefined interaction pairs, and provide
+limited mechanistic transparency or condition-aware interpretation.
+Consequently, they are poorly equipped to represent interactions
+influenced by health-related conditions such as age, renal impairment,
+pregnancy, and lifestyle.
 
-DHFI-C unifies drugs, herbs, foods, health-related conditions, and underlying diseases within a single RDF knowledge graph and performs deterministic, rule-based pharmacokinetic (PK) and pharmacodynamic (PD) inference through explicit mechanistic pathways stored in GraphDB.
+**Methods**\
+We developed the **Drug--Herb--Food Interaction Checker (DHFI-C)**, an
+ontology-guided knowledge graph platform for mechanism-based and
+condition-inclusive interaction assessment. Evidence was curated from
+open-access literature following **PRISMA 2020 guidelines** and
+transformed into a structured data model encompassing drugs, herbs,
+foods, health-related conditions, and underlying diseases. Entities and
+interaction components were aligned with external biomedical ontologies
+where appropriate, while a **DHFI mini-ontology** was developed to
+capture interaction concepts insufficiently represented in existing
+ontologies. The system was implemented as a graph-native knowledge
+representation paired with a deterministic inference engine capable of
+deriving pharmacokinetic and pharmacodynamic interactions through shared
+mechanistic pathways. The DHFI-C was evaluated using a comprehensive
+predefined use case.
 
-This repository contains the full system implementation (frontend, backend, data model, and reasoning components) corresponding to the version evaluated in the accompanying F1000Research manuscript (under review).
+**Results**\
+The resulting knowledge graph integrates more than **24,000 drug
+entities**, **92 herb/food entities**, and **1,277 curated interaction
+records**, together with mechanistic nodes representing enzymes,
+transporters, and pharmacodynamic effects. The DHFI-C reports both
+curated and mechanism-inferred interactions with explicit evidence
+provenance. In the evaluation scenario, the system successfully handled
+multi-domain interactions, generated condition-aware interpretations,
+detected pharmacological effect duplication, decomposed combination
+products into constituent entities, and supported disease-driven drug
+suggestion workflows. Outputs are presented in both
+**consumer-oriented** and **expert-oriented** modes, each accompanied by
+mechanistic explanations.
 
-Scientific Motivation
+**Conclusions**\
+DHFI-C provides a transparent and extensible framework for assessing
+drug--herb--food interactions through integrated, mechanism-based
+reasoning. By modeling health-related conditions as first-class entities
+and unifying heterogeneous domains within a single knowledge graph, the
+platform addresses key limitations of existing interaction checkers and
+enables context-aware, mechanism-driven interpretation of complex
+interaction scenarios.
 
-Real-world medication use frequently involves concurrent consumption of prescription drugs with herbal products, dietary supplements, and foods, often under modifying conditions such as advanced age, pregnancy, renal impairment, hepatic impairment, or lifestyle factors (e.g., smoking).
+------------------------------------------------------------------------
 
-Existing interaction checkers:
+## System Overview
 
-focus primarily on drug–drug interactions,
+DHFI-C integrates three primary layers:
 
-rely on enumerated interaction pairs,
+1.  **Knowledge Layer**
+    -   Ontology-guided data model
+    -   RDF knowledge graph
+    -   Mechanistic entities (enzymes, transporters, PD effects)
+2.  **Inference Layer**
+    -   Deterministic rule-based reasoning
+    -   Mechanism-driven pharmacokinetic and pharmacodynamic inference
+3.  **Application Layer**
+    -   REST API backend
+    -   Web interface supporting multi-entity queries
+    -   Dual presentation modes (consumer / expert)
 
-rarely incorporate personal conditions into interaction reasoning,
+------------------------------------------------------------------------
 
-provide limited mechanistic explainability.
+## Repository Structure
 
-DHFI-C was developed to:
+    DHFI-C
+    │
+    ├── backend/
+    │   REST API server and SPARQL query services
+    │
+    ├── frontend/
+    │   React-based web interface
+    │
+    ├── docker-compose.yml
+    │   Container configuration for GraphDB and application services
+    │
+    ├── Dockerfile
+    │   Backend container build definition
+    │
+    └── README.md
 
-support multi-domain interaction checking (drug, herb, food, condition),
+------------------------------------------------------------------------
 
-enable mechanism-based inference beyond curated pairs,
+## Installation
 
-treat health-related conditions as first-class entities in interaction interpretation,
+### Prerequisites
 
-provide transparent, ontology-aligned, and reproducible outputs.
+-   Docker ≥ 20\
+-   Docker Compose ≥ 2\
+-   Node.js ≥ 18 (optional for local development)
 
-Conceptual Architecture
+------------------------------------------------------------------------
 
-DHFI-C adopts an ontology-first and mechanism-first design philosophy.
+### Option 1 --- Run using Docker (recommended)
 
-High-level architecture
+``` bash
+docker compose up --build
+```
 
-Frontend
+This will start:
 
-Web interface for multi-entity input (drugs, herbs, foods, conditions)
+-   GraphDB triple store\
+-   Backend API service\
+-   Frontend web interface
 
-Dual output modes:
+GraphDB web interface:
 
-Public mode: simplified summaries
+    http://localhost:7200
 
-Expert mode: PK/PD mechanisms, ontology paths, evidence tags
+Create a repository named:
+
+    dhfi
+
+and import the DHFI knowledge graph dataset.
+
+------------------------------------------------------------------------
+
+### Option 2 --- Local Development
 
 Backend
 
-Interaction & Inference API (Node.js)
-
-Deterministic, rule-based inference engine
-
-Knowledge Graph Layer
-
-RDF knowledge graph stored in GraphDB
-
-Entities, interactions, mechanisms, and ontology mappings encoded explicitly
-
-Accessed via SPARQL endpoint
-
-Curated interactions and mechanism-inferred interactions are explicitly distinguished, and all outputs are traceable to their mechanistic and evidence basis.
-
-Core Functional Modules
-
-DHFI-C integrates the following modules operating on a shared structured data model and RDF knowledge graph:
-
-Mechanism-Based Interaction Inference Engine
-PK/PD inference via shared enzymes, transporters, targets, and effect pathways
-
-Condition-Inclusive Interaction Interpretation
-Health-related conditions (e.g., age, pregnancy, renal impairment, hepatic impairment, smoking) participate directly in reasoning
-
-Pharmacological Effect Duplication Detection
-Identification of overlapping or equivalent pharmacodynamic effects
-
-Drug Combination Handling Module
-Decomposition of multi-ingredient products into active components with provenance preservation
-
-Disease-to-Drug Suggestion Module
-Disease-driven input assistance using curated disease–drug associations
-(non-causal, non-inferential)
-
-Data Model and Semantic Alignment
-
-Entities are represented as first-class objects and organized into:
-
-Drugs and drug classes
-
-Products (herbs and foods)
-
-Health-related conditions
-
-Underlying diseases
-
-Pharmacokinetic targets (enzymes, transporters)
-
-Pharmacodynamic effect descriptors
-
-Ontology alignment follows a hybrid strategy:
-
-External ontologies where appropriate:
-
-NCIT (drugs, drug classes)
-
-DINTO (mechanistic interaction types, partial)
-
-MONDO (underlying diseases)
-
-FoodOn, NCBI Taxonomy
-
-UniProt / Pfam (PK targets)
-
-A DHFI mini-ontology for domains insufficiently covered by existing ontologies
-(health-related conditions, interaction-level PD effects)
-
-Internal identifiers remain the primary reference system to preserve reproducibility and independence from ontology version changes.
-
-Repository Structure
-dhfi-checker-main/
-├── dhfi-backend/        # Node.js backend & inference API
-│   └── src/
-│       └── services/
-│           └── graphdbClient.js   # SPARQL client for GraphDB
-├── frontend/            # Web frontend
-├── docker-compose.yml   # Reproducible deployment
-├── Dockerfile
-├── README.md
-
-Reproducibility and Installation
-Tested environment
-
-Node.js ≥ 20
-
-GraphDB (Free Edition) as the primary RDF triplestore
-
-Modern web browser (Chrome recommended)
-
-DHFI-C does not use MongoDB or any relational database.
-All interaction reasoning is performed over the RDF knowledge graph in GraphDB.
-
-Local development (non-Docker)
-Backend
-cd dhfi-backend
+``` bash
+cd backend
 npm install
-cp .env.example .env
-# set SPARQL_ENDPOINT to your GraphDB repository endpoint
-npm run dev
+npm start
+```
 
 Frontend
+
+``` bash
 cd frontend
 npm install
 npm run dev
+```
 
+------------------------------------------------------------------------
 
-Note: GraphDB must be running, and the DHFI repository must be available
-at the configured SPARQL_ENDPOINT before starting the backend.
+## Usage
 
-Docker-based setup (recommended for reproducibility)
-docker-compose up --build
+DHFI-C allows users to query interactions among:
 
+-   prescription drugs
+-   herbal medicines
+-   dietary supplements
+-   foods
+-   health-related conditions
 
-This launches:
+Example scenarios include:
 
-GraphDB
+-   drug--herb interaction
+-   drug--food interaction
+-   multi-entity interaction assessment
+-   disease-driven medication suggestions
 
-Backend API
+Results include:
 
-Frontend interface
+-   curated interaction evidence
+-   mechanism-inferred interactions
+-   pharmacokinetic pathways
+-   pharmacodynamic effect overlap
 
-Versioning and Stability
+------------------------------------------------------------------------
 
-This repository corresponds to the version evaluated in the manuscript:
+## Reproducibility
 
-An Integrated Drug–Herb–Food Interaction Checker with Ontology-Guided Knowledge Graph Reasoning and Health-Condition–Integrated Interpretation
-F1000Research (under review)
+The version corresponding to the published article is archived via
+**Zenodo DOI**.
 
-Current version: v0.9.0 (research prototype)
+DOI: *(to be inserted after Zenodo archive)*
 
-Intended Use and Limitations
+------------------------------------------------------------------------
 
-DHFI-C is intended as a research and educational tool to support:
+## License
 
-Transparent interaction interpretation
+This project is distributed under the terms of the **Apache License
+2.0**.
 
-Mechanism-driven hypothesis generation
+See the `LICENSE` file for details.
 
-Multi-domain interaction assessment
+------------------------------------------------------------------------
 
-It is not intended to replace clinical judgment, regulatory drug safety evaluation, or professional medical decision-making.
+## Citation
 
-License
+If you use DHFI-C in research, please cite:
 
-This software is released under the XXX License.
+Drug--Herb--Food Interaction Checker (DHFI-C).\
+F1000Research Software Tool Article.
 
-How to Cite
-
-If you use DHFI-C in academic work, please cite:
-
-[Authors]. An Integrated Drug–Herb–Food Interaction Checker with Ontology-Guided Knowledge Graph Reasoning and Health-Condition–Integrated Interpretation.
-F1000Research, under review.
+Full citation details will be updated upon publication.

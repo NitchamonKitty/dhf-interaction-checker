@@ -1,38 +1,49 @@
 version: '3.9'
+
 services:
-  mongo:
-    image: mongo:7
+  graphdb:
+    image: ontotext/graphdb:10.8.0
     restart: unless-stopped
-    ports: [ "27017:27017" ]
+    ports:
+      - "7200:7200"
     volumes:
-      - mongo_data:/data/db
+      - graphdb_data:/opt/graphdb/home
+    # Optional: tune memory for your machine (uncomment if needed)
+    # environment:
+    #   - GDB_JAVA_OPTS=-Xms2g -Xmx2g
 
   backend:
     build:
       context: ./backend
       dockerfile: ../Dockerfile
+    restart: unless-stopped
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - PORT=4000
-      - MONGO_URI=mongodb://mongo:27017/interactiondb
+      # SPARQL endpoint *inside* the Docker network (GraphDB repository must exist)
+      - SPARQL_ENDPOINT=http://graphdb:7200/repositories/dhfi
+      # CORS origin for the browser client
       - CLIENT_URL=http://localhost:5173
-    depends_on: [ mongo ]
-    ports: [ "4000:4000" ]
-    volumes:
-      - ./backend:/app
-    command: npm run dev
+    depends_on:
+      - graphdb
+    ports:
+      - "4000:4000"
+    command: npm start
 
   frontend:
     build:
       context: ./frontend
       dockerfile: ../Dockerfile
+    restart: unless-stopped
     environment:
+      # Used by the browser (host machine), not the Docker network
       - VITE_API_URL=http://localhost:4000
-    depends_on: [ backend ]
-    ports: [ "5173:5173" ]
-    volumes:
-      - ./frontend:/app
-    command: npm run dev
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    # Vite must listen on 0.0.0.0 inside container
+    command: npm run dev -- --host 0.0.0.0 --port 5173
 
 volumes:
-  mongo_data:
+  graphdb_data:
